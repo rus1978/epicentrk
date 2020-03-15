@@ -1,0 +1,8 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Lib\\": "lib",
+      "Lib\\Parser\\": "lib\\parser"
+    }
+  }
+}

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="39bad2d4-71fc-4ef0-9d15-7698c0198da8" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="PhpDebugGeneral" xdebug_debug_port="9008" />
+  <component name="PhpServers">
+    <servers>
+      <server host="epicentrk.loc" id="0d3ef4f7-b849-4866-87f9-d1b2dbc3309f" name="epicentrk" port="8080" />
+    </servers>
+  </component>
+  <component name="PhpWebServerValidation" path_to_validation_script="$PROJECT_DIR$" selected_validation_type="LOCAL" web_path_to_validation_script="http://epicentrk.loc:8080/" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="php" />
+  <component name="ProjectId" id="1Z7iO3TrynUV9iICyUOtl3bNDyR" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+  </component>
+  <component name="RunManager">
+    <configuration name="index.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/public/index.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="39bad2d4-71fc-4ef0-9d15-7698c0198da8" name="Default Changelist" comment="" />
+      <created>1584196497028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584196497028</updated>
+      <workItem from="1584196498224" duration="1114000" />
+      <workItem from="1584198170928" duration="3628000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="572" y="210" width="824" height="684" key="#CLI_Interpreters" timestamp="1584201022555">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="572" y="210" width="824" height="684" key="#CLI_Interpreters/59.27.1861.1053@59.27.1861.1053" timestamp="1584201022555" />
+    <state x="743" y="387" width="472" height="329" key="#Docker2" timestamp="1584198400628">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="743" y="387" width="472" height="329" key="#Docker2/59.27.1861.1053@59.27.1861.1053" timestamp="1584198400628" />
+    <state x="743" y="387" width="472" height="329" key="#Docker3" timestamp="1584198463351">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="743" y="387" width="472" height="329" key="#Docker3/59.27.1861.1053@59.27.1861.1053" timestamp="1584198463351" />
+    <state x="634" y="106" width="700" height="893" key="#PHP" timestamp="1584200935265">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="634" y="106" width="700" height="893" key="#PHP/59.27.1861.1053@59.27.1861.1053" timestamp="1584200935265" />
+    <state x="568" y="378" width="846" height="586" key="#com.jetbrains.php.debug.validation.PhpWebServerValidationDialog#" timestamp="1584201040484">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="568" y="378" width="846" height="586" key="#com.jetbrains.php.debug.validation.PhpWebServerValidationDialog#/59.27.1861.1053@59.27.1861.1053" timestamp="1584201040484" />
+    <state x="740" y="227" width="489" height="651" key="#index.php" timestamp="1584200807959">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="740" y="227" width="489" height="651" key="#index.php/59.27.1861.1053@59.27.1861.1053" timestamp="1584200807959" />
+    <state x="820" y="485" width="307" height="216" key="DockerComposeFileDialog" timestamp="1584201007877">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="820" y="485" width="307" height="216" key="DockerComposeFileDialog/59.27.1861.1053@59.27.1861.1053" timestamp="1584201007877" />
+    <state x="772" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1584202460606">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="772" y="310" width="424" height="484" key="FileChooserDialogImpl/59.27.1861.1053@59.27.1861.1053" timestamp="1584202460606" />
+    <state width="1815" height="270" key="GridCell.Tab.0.bottom" timestamp="1584202461790">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.0.bottom/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461790" />
+    <state width="1815" height="270" key="GridCell.Tab.0.center" timestamp="1584202461789">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.0.center/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461789" />
+    <state width="1815" height="270" key="GridCell.Tab.0.left" timestamp="1584202461788">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.0.left/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461788" />
+    <state width="1815" height="270" key="GridCell.Tab.0.right" timestamp="1584202461789">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.0.right/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461789" />
+    <state width="1815" height="270" key="GridCell.Tab.1.bottom" timestamp="1584202461791">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.1.bottom/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461791" />
+    <state width="1815" height="270" key="GridCell.Tab.1.center" timestamp="1584202461791">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.1.center/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461791" />
+    <state width="1815" height="270" key="GridCell.Tab.1.left" timestamp="1584202461790">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.1.left/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461790" />
+    <state width="1815" height="270" key="GridCell.Tab.1.right" timestamp="1584202461791">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="270" key="GridCell.Tab.1.right/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461791" />
+    <state width="1815" height="334" key="GridCell.Tab.2.bottom" timestamp="1584202461768">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="334" key="GridCell.Tab.2.bottom/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461768" />
+    <state width="1815" height="334" key="GridCell.Tab.2.center" timestamp="1584202461766">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="334" key="GridCell.Tab.2.center/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461766" />
+    <state width="1815" height="334" key="GridCell.Tab.2.left" timestamp="1584202461766">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="334" key="GridCell.Tab.2.left/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461766" />
+    <state width="1815" height="334" key="GridCell.Tab.2.right" timestamp="1584202461767">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state width="1815" height="334" key="GridCell.Tab.2.right/59.27.1861.1053@59.27.1861.1053" timestamp="1584202461767" />
+    <state x="478" y="187" key="SettingsEditor" timestamp="1584202302644">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="478" y="187" key="SettingsEditor/59.27.1861.1053@59.27.1861.1053" timestamp="1584202302644" />
+    <state x="733" y="284" width="501" height="535" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1584200644274">
+      <screen x="59" y="27" width="1861" height="1053" />
+    </state>
+    <state x="733" y="284" width="501" height="535" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/59.27.1861.1053@59.27.1861.1053" timestamp="1584200644274" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/index.php</url>
+          <line>15</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
