@@ -13,20 +13,29 @@ class DuplicateSearch
     const GROUP_FIELDS= ['email', 'card', 'phone'];//искать дубликаты в этих полях
 
     protected IParserDriver $parser;//хранит ссылку на один из объектов парсера
-    private array $indexFields;//индексы для метода getField()
+    private array $i;//строчные индексы в числовые
 
     protected array $data;//массив полученный из парсера
     protected int $lengthData;//длина массива посчитана один раз
 
     public function __construct(IParserDriver $parser)
     {
-        $this->indexFields= array_flip(self::FIELDS);
+        $this->i= array_flip(self::FIELDS);
         $this->parser = $parser;
     }
 
     protected function getField(array $array, string $fieldName): int
     {
-        return $array[$this->indexFields[$fieldName]];
+        return $array[$this->i[$fieldName]];
+    }
+
+    protected array $maps;
+    protected function getMinPid($pid)
+    {
+        while($pid !== ($childPid=$this->maps[$pid]) ){
+            $pid= $this->maps[$childPid];
+        }
+        return $pid;
     }
 
     public function exec(): array
@@ -34,15 +43,59 @@ class DuplicateSearch
         $this->data= $this->parser->getData();
         $this->lengthData= count($this->data);//немного ускорить посчитав длину один раз
 
+
         $groups= [];
+        $groups2= [];
         foreach(self::GROUP_FIELDS as $fieldName){
             $groupColumn= new GroupColumn(
-                array_column($this->data, $this->indexFields[$fieldName]),
+                $this->data,
+                $this->i[$fieldName],
                 $this->lengthData
             );
-            $groups[$fieldName]= $groupColumn->get($this->data);
+            $groups[$fieldName]= [];
+            $groupColumn->exec($groups[$fieldName], $groups2);
+            //$groups[$fieldName]= $groupColumn->get($this->data);
         };
-        print_r($groups);
+
+       // print_r($groups);
+       // print_r($groups2);
+
+        for($i=0;$i<$this->lengthData;$i++){
+            $row= &$this->data[$i];
+
+            $tmp= [];
+            foreach(self::GROUP_FIELDS as $fieldName){
+                $tmp[]= $groups[$fieldName][$row[0]]['pid'];
+            }
+            $row[1]= min($tmp);
+            $row[5]= '('.implode(',', $tmp).'='.min($tmp).')';
+//            $result[$row[0]]= [
+//                $row[0],
+//                min($tmp)
+//            ];
+        }
+
+        $this->maps= array_column($this->data, 1, 0);
+
+        for($i=0;$i<$this->lengthData;$i++){
+            $row= &$this->data[$i];
+
+            $row[6]= $this->getMinPid($row[1]);
+//            $result[$row[0]]= [
+//                $row[0],
+//                min($tmp)
+//            ];
+        }
+
+
+        //;
+
+        print_r($this->maps);
+
+
+
+//        print_r($this->data);
+//        exit;
 
 
 
