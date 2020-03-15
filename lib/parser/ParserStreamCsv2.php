@@ -9,16 +9,17 @@
 
 class ParserStreamCsv2 implements IParserDriver
 {
-
     public function getData(): array
     {
-        $data= [];
-        $handle = fopen('php://input', "r");
-        foreach (fgetcsv($handle, 1000, ",") as $row ){
-            $data[]= $row;
-        }
-        fclose($handle);
+        $result= [];
 
-        return $data;
+        if(($handle = fopen('php://input', 'r')) !== FALSE) {
+            while(($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
+                $result[] = $data;
+            }
+            fclose($handle);
+        }
+
+        return $result;
     }
 }

@@ -1,0 +1,11 @@
+.DS_Store
+*.log
+
+
+/.htaccess
+.idea/
+.resources/
+/test/
+
+/.env
+/error_log

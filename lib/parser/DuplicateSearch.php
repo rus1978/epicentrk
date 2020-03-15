@@ -9,13 +9,14 @@
 
 class DuplicateSearch
 {
-    const FIELDS= ['id', 'parentId', 'email', 'card', 'phone'];//позиция ожидаемыех полей во входящих данных
+    const FIELDS= ['id', 'parentId', 'email', 'card', 'phone'];//шаблон/позиция ожидаемыех полей во входящих данных
     const GROUP_FIELDS= ['email', 'card', 'phone'];//искать дубликаты в этих полях
 
-    protected IParserDriver $parser;//хранит ссылку на один из объектов парсера
-    private array $i;//строчные индексы в числовые
+    protected IParserDriver $parser;//хранит ссылку на один из объектов парсера (паттерн стратегия)
+    protected array $i;//вспомогательный массив, позволяет получить индекс по имени поля
+    protected array $groups= [];//массив связей id и pid
 
-    protected array $data;//массив полученный из парсера
+    protected array $data;//массив источник полученный из парсера, подразумевается что данные отсортированы по id
     protected int $lengthData;//длина массива посчитана один раз
 
     public function __construct(IParserDriver $parser)
@@ -24,98 +25,54 @@ class DuplicateSearch
         $this->parser = $parser;
     }
 
-    protected function getField(array $array, string $fieldName): int
+    /**
+     * Глубокий поиск предка
+     * @param $pid
+     * @return mixed
+     */
+    protected function getPidOrigin($pid): int
     {
-        return $array[$this->i[$fieldName]];
-    }
-
-    protected array $maps;
-    protected function getMinPid($pid)
-    {
-        while($pid !== ($childPid=$this->maps[$pid]) ){
-            $pid= $this->maps[$childPid];
+        while($pid !== ($childPid=$this->groups[$pid]) ){
+            $pid= $this->groups[$childPid];
         }
         return $pid;
     }
 
-    public function exec(): array
+    /**
+     * Собственно старт
+     */
+    public function exec(): void
     {
         $this->data= $this->parser->getData();
         $this->lengthData= count($this->data);//немного ускорить посчитав длину один раз
 
-
-        $groups= [];
-        $groups2= [];
+        //Проход по колонкам, фиксация групп
         foreach(self::GROUP_FIELDS as $fieldName){
             $groupColumn= new GroupColumn(
                 $this->data,
                 $this->i[$fieldName],
+                $this->i['id'],
                 $this->lengthData
             );
-            $groups[$fieldName]= [];
-            $groupColumn->exec($groups[$fieldName], $groups2);
-            //$groups[$fieldName]= $groupColumn->get($this->data);
+            $groupColumn->merge($this->groups);
         };
-
-       // print_r($groups);
-       // print_r($groups2);
-
-        for($i=0;$i<$this->lengthData;$i++){
-            $row= &$this->data[$i];
-
-            $tmp= [];
-            foreach(self::GROUP_FIELDS as $fieldName){
-                $tmp[]= $groups[$fieldName][$row[0]]['pid'];
-            }
-            $row[1]= min($tmp);
-            $row[5]= '('.implode(',', $tmp).'='.min($tmp).')';
-//            $result[$row[0]]= [
-//                $row[0],
-//                min($tmp)
-//            ];
-        }
-
-        $this->maps= array_column($this->data, 1, 0);
-
-        for($i=0;$i<$this->lengthData;$i++){
-            $row= &$this->data[$i];
-
-            $row[6]= $this->getMinPid($row[1]);
-//            $result[$row[0]]= [
-//                $row[0],
-//                min($tmp)
-//            ];
-        }
-
-
-        //;
-
-        print_r($this->maps);
-
-
-
-//        print_r($this->data);
-//        exit;
-
-
-
-       // print_r( $this->data );$fieldName
-
-        return $this->data;
     }
 
-//    protected function render(array $groups): array
-//    {
-//        $result= [];
-//        foreach($this->data as $index=>$row){
-//            $result[$index]= [
-//                //$this->getField($row, 'id'),
-//                //$this->getField($row, 'card'),
-//                $row[0],
-//                $row[2],
-//                '*'
-//            ];
-//        }
-//        return $result;
-//    }
+    /**
+     * Можно было бы визуализацию кинуть в отдельный класс, но мы экономим ресурсы, избегая лишнего перебора.
+     * 1. Проход по исходнику и вспомогательному массиву связей, поиск и замена pid по всей глубине предков.
+     * 2. Вывод на экран результата
+     */
+    public function render(): void
+    {
+        for($i=0;$i<$this->lengthData;$i++){
+            $row= $this->data[$i];
+
+            $id= $row[$this->i['id']];
+            $newPid= $this->getPidOrigin($this->groups[$id]);//глубокий поиск родителя
+
+            echo $id,','.$newPid;
+            if($i+1<$this->lengthData)echo "\r\n";//последний перевод строки не ставим
+        }
+    }
 }
