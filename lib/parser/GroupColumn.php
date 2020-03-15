@@ -52,12 +52,9 @@ class GroupColumn
             $pid= &$groups[$currentId];
 
             $next= next($this->data);
-            $nextValue= $next[$this->groupIndex];
+            $nextValue= ($next === false) ? null : $next[$this->groupIndex];
 
-
-            if( !isset($pid) ){
-                $pid= $currentId;
-            }
+            if(!isset($pid))$pid= $currentId;
 
             if($currentValue == $nextValue){
                 if($groupMinIndex==$this->lengthData+1)$groupMinIndex= $currentId;//единожды при создании группы
