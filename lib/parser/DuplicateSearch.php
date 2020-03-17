@@ -14,10 +14,13 @@ class DuplicateSearch
 
     protected IParserDriver $parser;//хранит ссылку на один из объектов парсера (паттерн стратегия)
     protected array $i;//вспомогательный массив, позволяет получить индекс по имени поля
-    protected array $groups= [];//массив связей id и pid
+   // protected array $groups= [];
 
     protected array $data;//массив источник полученный из парсера, подразумевается что данные отсортированы по id
     protected int $lengthData;//длина массива посчитана один раз
+
+    protected array $columns= [];
+    protected array $groupToId= [];
 
     public function __construct(IParserDriver $parser)
     {
@@ -25,17 +28,10 @@ class DuplicateSearch
         $this->parser = $parser;
     }
 
-    /**
-     * Глубокий поиск предка
-     * @param $pid
-     * @return mixed
-     */
-    protected function getPidOrigin($pid): int
+
+    protected function field(array $data, string $name)
     {
-        while($pid !== ($childPid=$this->groups[$pid]) ){
-            $pid= $this->groups[$childPid];
-        }
-        return $pid;
+        return $data[$this->i[$name]];
     }
 
     /**
@@ -46,33 +42,83 @@ class DuplicateSearch
         $this->data= $this->parser->getData();
         $this->lengthData= count($this->data);//немного ускорить посчитав длину один раз
 
-        //Проход по колонкам, фиксация групп
+        $this->createDataColumns();//Создание вспомогательных массивов колонок, для удобного поиска email, card, phone
+
+        $columnGroups= new ColumnGroups();
+
+        for($i=0;$i<$this->lengthData;$i++)
+        {
+            $row= &$this->data[$i];
+            $ids= $this->searchDublInColumns($row);
+
+           // $searchIndexGroups= [];
+
+            if( count($ids) > 1 ){
+                $searchIndexGroups= $columnGroups->append($ids);
+
+                //$row['group']= $searchIndexGroups[0];
+                $this->groupToId[ $this->field($row, 'id') ]= $searchIndexGroups[0];
+
+                $this->replaceGroupIndex($searchIndexGroups);
+            }
+        }
+
+        $this->render($columnGroups);
+    }
+
+    protected function replaceGroupIndex($searchIndexGroups)
+    {
+        if( count($searchIndexGroups) < 2 )return;
+
+        foreach (array_slice($searchIndexGroups, 1) as $otherGroup){
+
+            $founded= array_keys($this->groupToId, $otherGroup);
+            foreach($founded as $key=>$value){
+                $this->groupToId[$key]= $searchIndexGroups[0];
+            }
+        }
+    }
+
+    /**
+     * Поиск дубликатов по всем ключевым колонкам (email, card, phone)
+     * @param array $row
+     * @return array
+     */
+    protected function searchDublInColumns(array $row) : array
+    {
+        $keys= [];
         foreach(self::GROUP_FIELDS as $fieldName){
-            $groupColumn= new GroupColumn(
-                $this->data,
-                $this->i[$fieldName],
-                $this->i['id'],
-                $this->lengthData
-            );
-            $groupColumn->merge($this->groups);
+            $keys= array_merge( $keys, array_keys($this->columns[$fieldName], $this->field($row, $fieldName)) );
+        }
+        return array_unique($keys);
+    }
+
+    protected function createDataColumns(): void
+    {
+        foreach(self::GROUP_FIELDS as $fieldName){
+            $this->columns[$fieldName]= array_column($this->data, $this->i[$fieldName], $this->i['id']);
         };
     }
+
 
     /**
      * Можно было бы визуализацию кинуть в отдельный класс, но мы экономим ресурсы, избегая лишнего перебора.
      * 1. Проход по исходнику и вспомогательному массиву связей, поиск и замена pid по всей глубине предков.
      * 2. Вывод на экран результата
      */
-    public function render(): void
+    public function render($columnGroups): void
     {
         for($i=0;$i<$this->lengthData;$i++){
-            $row= $this->data[$i];
 
-            $id= $row[$this->i['id']];
-            $newPid= $this->getPidOrigin($this->groups[$id]);//глубокий поиск родителя
+            $id= $this->field($this->data[$i], 'id');
+            $groupIndex= (isset($this->groupToId[$id]) ? $this->groupToId[$id] : '*');
 
-            echo $id,','.$newPid;
+            //$newPid= $columnGroups->groups[ $groupIndex ];
+
+            echo $id.','.$groupIndex."\n";
             if($i+1<$this->lengthData)echo "\r\n";//последний перевод строки не ставим
         }
+
+        print_r($columnGroups->groups);
     }
 }

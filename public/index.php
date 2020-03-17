@@ -1,4 +1,4 @@
-<?php namespace Epicentrk;
+<?php /*namespace Epicentrk*/;
 
 require realpath(__DIR__.'/../vendor/autoload.php');
 
@@ -10,10 +10,16 @@ $parser= new \Lib\Parser\ParserFileCsv(__DIR__.'/files/users.csv');
 
 //Вариант: чтение данных из входящего потока в фомате csv
 //$parser= new \Lib\Parser\ParserStreamCsv();
-//$parser= new \Lib\Parser\ParserStreamCsv2();
 
-
+function dd($data)
+{
+    foreach(func_get_args() as $value){
+        var_export($value);
+        echo "\n";
+    }
+    exit;
+}
 
 $app = new \Lib\Parser\DuplicateSearch($parser);
 $app->exec();
-$app->render();
+//$app->render();
