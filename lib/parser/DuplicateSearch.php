@@ -51,12 +51,9 @@ class DuplicateSearch
             $row= &$this->data[$i];
             $ids= $this->searchDublInColumns($row);
 
-           // $searchIndexGroups= [];
-
             if( count($ids) > 1 ){
-                $searchIndexGroups= $columnGroups->append($ids);
+                $searchIndexGroups= $columnGroups->makeGroup($ids);
 
-                //$row['group']= $searchIndexGroups[0];
                 $this->groupToId[ $this->field($row, 'id') ]= $searchIndexGroups[0];
 
                 $this->replaceGroupIndex($searchIndexGroups);
@@ -73,8 +70,11 @@ class DuplicateSearch
         foreach (array_slice($searchIndexGroups, 1) as $otherGroup){
 
             $founded= array_keys($this->groupToId, $otherGroup);
-            foreach($founded as $key=>$value){
-                $this->groupToId[$key]= $searchIndexGroups[0];
+
+            if($founded){
+                foreach($founded as $id){
+                    $this->groupToId[$id]= $searchIndexGroups[0];
+                }
             }
         }
     }
@@ -112,6 +112,7 @@ class DuplicateSearch
 
             $id= $this->field($this->data[$i], 'id');
             $groupIndex= (isset($this->groupToId[$id]) ? $this->groupToId[$id] : '*');
+
 
             //$newPid= $columnGroups->groups[ $groupIndex ];
 

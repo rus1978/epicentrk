@@ -1,29 +1,23 @@
 <?php namespace Lib\Parser;
+
 /**
  * Project: epicentrk
  * User: cooper
  * Date: 17.03.2020
  */
+
 class ColumnGroups
 {
     public array $groups=[    //////////// todo изменить модификатор сделать вместо него публичнуб функцию
-//       [50],
-//       [50],
-//       [50],
-////       [50],
-//        [1],
-//        [2],
-//        [5],
-//        [20]
+
     ];
 
-    public function append(array $ids) : array
+    public function makeGroup(array $ids) : array
     {
-        $searchIndexGroups= [];//найдены индексы групп
+        $searchIndexGroups=[];//найти индексы групп
+        $idWithoutGroup=[];//входящие ids без групп
 
-        $idWithoutGroup= [];//входящие ids без групп
-        $this->searchGroups($ids, $searchIndexGroups, $idWithoutGroup);
-
+        $this->searchGroups($ids,$searchIndexGroups,$idWithoutGroup);
 
 
         if($idWithoutGroup){//Создание новой группы
@@ -31,28 +25,12 @@ class ColumnGroups
             $this->groups[]= $idWithoutGroup;//данные в группу
         }
 
-       // dd($idWithoutGroup, $searchIndexGroups, $this->groups);
+       // dd($this->groups);
 
 
-//        if(count($searchIndexGroups) == 1/* && !$idWithoutGroup*/){//Найдена одна группа, вернуть ее индекс
-//           // echo 'второе-'."\n";
-//           // dd($this->groups, $searchIndexGroups[0] );
-//            return $searchIndexGroups[0];
-//        }
-//        else{
-//          //  echo 'третье-'."\n";
-//           // dd($searchIndexGroups, $this->groups);
-//           // $this->groups[]= ['2222'];
-//            $this->mergeGroups($searchIndexGroups);
-//            //$this->groups[]= ['3333'];
-//           // dd( $this->groups );
-//
-//        }
-
-        if( count($searchIndexGroups) > 1 ){
+        if( count($searchIndexGroups) > 1 ){//слияние групп
             $this->mergeGroups($searchIndexGroups);
         }
-
 
         return $searchIndexGroups;
     }
@@ -76,7 +54,7 @@ class ColumnGroups
      * @param $ids
      * @return array
      */
-    protected function searchGroups($ids, &$searchGroups, &$idWithoutGroup): void
+    protected function searchGroups(array $ids, array &$searchGroups, array &$idWithoutGroup): void
     {
 
         $idWithoutGroup= $ids;
@@ -92,6 +70,7 @@ class ColumnGroups
             }
         }
         $searchGroups= array_unique($searchGroups);
-        ksort($searchGroups);
+      //  ksort($searchGroups);
+        sort($searchGroups);
     }
 }

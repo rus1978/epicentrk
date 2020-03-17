@@ -1,8 +1,7 @@
-1,NULL,email1,card1,phone1,login
-2,NULL,email6,card2,phone2,login
-3,NULL,email3,card3,phone3,login
-4,NULL,email4,card4,phone2,login
-5,NULL,email1,card4,phone5,login
-6,NULL,email7,card7,phone7,login
-2000,NULL,email7,card7,phone7,login
-2001,NULL,email5,card4,phone5,login
+100,NULL,email1,card1,phone1,login
+20,NULL,email6,card2,phone2,login
+30,NULL,email3,card3,phone3,login
+40,NULL,email4,card4,phone2,login
+50,NULL,email1,card4,phone5,login
+2000,NULL,email5,card4,phone5,login
+
