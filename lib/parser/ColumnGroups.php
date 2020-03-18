@@ -8,9 +8,12 @@
 
 class ColumnGroups
 {
-    public array $groups=[    //////////// todo изменить модификатор сделать вместо него публичнуб функцию
+    private array $groups=[];
 
-    ];
+    public function getGroup(int $id)
+    {
+        return $this->groups[$id];
+    }
 
     public function makeGroup(array $ids) : array
     {
@@ -56,7 +59,6 @@ class ColumnGroups
      */
     protected function searchGroups(array $ids, array &$searchGroups, array &$idWithoutGroup): void
     {
-
         $idWithoutGroup= $ids;
         foreach($ids as $idsIndex=>$id)//for использовать нельзя, т.к. индексы во входящем массиве могут быть не предсказуемы 1,3,5,6...
         {
@@ -70,7 +72,6 @@ class ColumnGroups
             }
         }
         $searchGroups= array_unique($searchGroups);
-      //  ksort($searchGroups);
         sort($searchGroups);
     }
 }

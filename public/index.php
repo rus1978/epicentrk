@@ -22,4 +22,4 @@ function dd($data)
 
 $app = new \Lib\Parser\DuplicateSearch($parser);
 $app->exec();
-//$app->render();
+$app->render();
