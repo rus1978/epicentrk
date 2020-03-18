@@ -15,11 +15,11 @@ class DuplicateSearch
     protected IParserDriver $parser;//хранит ссылку на один из объектов парсера (паттерн стратегия)
     protected array $i;//вспомогательный массив, позволяет получить индекс по имени поля
 
-    protected array $data;//массив источник полученный из парсера, подразумевается что данные отсортированы по id
-    protected int $lengthData;//длина массива посчитана один раз
+    protected array $data;//массив источник, полученный из парсера, подразумевается, что данные отсортированы по id
+    protected int $lengthData;//длина массива входящих данных посчитана один раз
 
-    protected array $columns= [];
-    protected array $groups= [];
+    protected array $columns= [];//вспомогательный массив для поиска дубликатов
+    protected array $groups= [];//хранит связи groupIndex c rowId
 
     protected ColumnGroups $columnGroups;
 

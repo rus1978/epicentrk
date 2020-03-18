@@ -15,6 +15,11 @@ class ColumnGroups
         return $this->groups[$id];
     }
 
+    /**
+     * Создать новую группу. Вернуть индексы существующих, предварительно объединив несколько в одну
+     * @param array $ids
+     * @return array
+     */
     public function makeGroup(array $ids) : array
     {
         $searchIndexGroups=[];//найти индексы групп
@@ -28,9 +33,6 @@ class ColumnGroups
             $this->groups[]= $idWithoutGroup;//данные в группу
         }
 
-       // dd($this->groups);
-
-
         if( count($searchIndexGroups) > 1 ){//слияние групп
             $this->mergeGroups($searchIndexGroups);
         }
@@ -38,6 +40,10 @@ class ColumnGroups
         return $searchIndexGroups;
     }
 
+    /**
+     * Объеденить группы
+     * @param array $searchIndexGroups
+     */
     protected function mergeGroups(array $searchIndexGroups): void
     {
         $firstGroup= &$this->groups[$searchIndexGroups[0]];
